@@ -6,33 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <style>
-        .customHeader {
-            dislpay:flex;
-            flex-wrap: wrap;
-            align-items: flex-end;
-            justify-content: space-between;
-            background-color: rgb(147,149,151);
-            box-shadow: 0px 9px 20px -4px #000000;
-            /*position: sticky;
-            top: 0px;
-            z-index: 99;*/
-        }
-        .back {
-            background-color: rgb(245,223,77);
-        }
-        .container {
-            border-radius: 10px;
-            background-color: white;
-        }
-        .custombtn button:hover {
-            background-color: rgb(147,149,151);
-        }
-        .steps {
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-    </style>
+    <link href="../static/css/design.css" th:href="@{css/design.css}" rel="stylesheet">
     </head>
 <body class="back">
 <header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-body border-bottom shadow-sm customHeader"  >
@@ -132,7 +106,7 @@
 
          <br>
 
-         <div class="custombtn results" hidden>
+         <div class="custombtn results" >
              <hr>
              <h1>Results</h1>
              <h4>Number of metrics in the text</h4>
@@ -140,24 +114,24 @@
                  <div class="col">
                      <p><strong>Clausal</strong></p>
                      <ul class="list-group list-group-flush">
-                         <li class="list-group-item">Finite adverbial clauses:</li>
-                         <li class="list-group-item">Wh-complement clauses:</li>
-                         <li class="list-group-item">Verb+that clauses:</li>
+                         <li class="list-group-item">Finite adverbial clauses: 0</li>
+                         <li class="list-group-item">Wh-complement clauses: 0</li>
+                         <li class="list-group-item">Verb+that clauses: 0</li>
                      </ul>
                  </div>
                  <div class="col">
                      <p><strong>Phrasal</strong></p>
                      <ul class="list-group list-group-flush">
-                         <li class="list-group-item">Nouns:</li>
-                         <li class="list-group-item">Attributive adjectives:</li>
-                         <li class="list-group-item">Premodifying nouns:</li>
-                         <li class="list-group-item">Of-genitives:</li>
+                         <li class="list-group-item">Nouns: 0</li>
+                         <li class="list-group-item">Attributive adjectives: 0</li>
+                         <li class="list-group-item">Premodifying nouns: 0</li>
+                         <li class="list-group-item">Of-genitives: 0 </li>
                      </ul>
                  </div>
              </div>
 
              <h4>Recommendations</h4>
-             <p>Good job! Everything is OK!</p>
+             <p>Some text here just for example ;)</p>
 
              <div class="custombtn">
                  <br>
