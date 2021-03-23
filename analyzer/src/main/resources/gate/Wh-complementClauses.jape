@@ -1,0 +1,24 @@
+Phase:WhComplementClauses
+Input: Token
+Options: control = all
+
+Rule: WhComplementClauses
+(
+	(
+		({Token.category == "VBD"}|{Token.category == "VBG"}|{Token.category == "VBN"}|
+			{Token.category == "VBP"}|{Token.category == "VB"}|{Token.category == "VBZ"})
+		({Token.string == "what"}|{Token.string == "which"}|{Token.string == "when"}|
+			{Token.category == "WRB"})
+		(
+			({Token.category == "NN"}|{Token.category == "NNS"}|{Token.category == "NNP"}|
+			{Token.category == "NNPS"})|
+			({Token.category == "DT"}
+				({Token.category == "NN"}|{Token.category == "NNS"}|{Token.category == "NNP"}|
+				{Token.category == "NNPS"})
+			)|
+			{Token.category == "PP"}
+		)
+	)
+): label
+-->
+:label.WhComplementClauses = {rule= "WhComplementClauses" }

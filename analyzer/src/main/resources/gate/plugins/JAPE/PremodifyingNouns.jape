@@ -1,0 +1,13 @@
+Phase:PremodifyingNouns
+Input: Token
+Options: control = all
+
+Rule: PremodifyingNouns
+(
+({Token.category == "NN"}|{Token.category == "NNS"}|
+	{Token.category == "NNP"}|{Token.category == "NNPS"}):label
+({Token.category == "NN"}|{Token.category == "NNS"}|
+	{Token.category == "NNP"}|{Token.category == "NNPS"})
+)
+-->
+:label.PremodifyingNouns = {rule= "PremodifyingNouns" }

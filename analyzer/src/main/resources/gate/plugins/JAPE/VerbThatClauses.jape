@@ -1,0 +1,12 @@
+Phase:VerbThatClauses
+Input: Token
+Options: control = all
+
+Rule: VerbThatClauses
+(
+({Token.category == "VBD"}|{Token.category == "VBG"}|{Token.category == "VBN"}|
+{Token.category == "VBP"}|{Token.category == "VB"}|{Token.category == "VBZ"})
+{Token.string == "that"}
+): label
+-->
+:label.VerbThatClauses = {rule= "VerbThatClauses" }

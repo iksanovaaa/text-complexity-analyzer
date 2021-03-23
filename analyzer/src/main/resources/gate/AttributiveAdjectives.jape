@@ -1,0 +1,12 @@
+Phase:AttributiveAdjectives
+Input: Token
+Options: control = all
+
+Rule: AttributiveAdjectives
+(
+({Token.category == "JJ"}):label
+({Token.category == "NN"}|{Token.category == "NNS"}|
+	{Token.category == "NNP"}|{Token.category == "NNPS"})
+)
+-->
+:label.AttributiveAdjectives = {rule= "AttributiveAdjectives" }

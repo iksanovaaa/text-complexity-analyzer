@@ -1,0 +1,11 @@
+Phase: Nouns
+Input: Token
+Options: control = all
+
+Rule: Nouns
+(
+{Token.category == "NN"}|{Token.category == "NNS"}|
+{Token.category == "NNP"}|{Token.category == "NNPS"}
+): label
+-->
+:label.Nouns = {rule= "Nouns" }

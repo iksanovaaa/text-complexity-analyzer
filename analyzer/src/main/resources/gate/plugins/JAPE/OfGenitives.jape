@@ -1,0 +1,14 @@
+Phase:OfGenitives
+Input: Token
+Options: control = all
+
+Rule: OfGenitives
+(
+({Token.category == "NN"}|{Token.category == "NNS"}|
+	{Token.category == "NNP"}|{Token.category == "NNPS"})
+{Token.string == "of"}
+({Token.category == "NN"}|{Token.category == "NNS"}|
+	{Token.category == "NNP"}|{Token.category == "NNPS"})
+): label
+-->
+:label.OfGenitives = {rule= "OfGenitives" }

@@ -1,0 +1,32 @@
+Phase:FiniteAdverbalClauses
+Input: Token
+Options: control = all
+
+Rule: FiniteAdverbalClauses
+(
+    ({Token.string == "In"}|{Token.string == "in"}){Token.string == "order"}{Token.string == "that"}|
+    ({Token.string == "If"}|{Token.string == "if"})|
+    ({Token.string == "Unless"}|{Token.string == "unless"})|
+    ({Token.string == "In"}|{Token.string == "in"}){Token.string == "the"}{Token.string == "evident"}
+    {Token.string == "that"}|
+    ({Token.string == "Provided"}|{Token.string == "provided"}){Token.string == "that"}|
+    ({Token.string == "Although"}|{Token.string == "although"})|
+    ({Token.string == "Even"}|{Token.string == "even"}){Token.string == "though"}|
+    ({Token.string == "Despite"}|{Token.string == "despite"}){Token.string == "the"}
+    {Token.string == "fact"}{Token.string == "that"}|
+    ({Token.string == "When"}|{Token.string == "when"})|
+    ({Token.string == "After"}|{Token.string == "after"})|
+    ({Token.string == "Before"}|{Token.string == "before"})|
+    ({Token.string == "Until"}|{Token.string == "until"})|
+    ({Token.string == "As"}|{Token.string == "as"}){Token.string == "soon"}{Token.string == "as"}|
+    ({Token.string == "Because"}|{Token.string == "because"})|
+    ({Token.string == "Since"}|{Token.string == "since"})|
+    ({Token.string == "Where"}|{Token.string == "where"})|
+    ({Token.string == "So"}|{Token.string == "so"}){Token.string == "that"}|
+    ({Token.string == "As"}|{Token.string == "as"}){Token.string == "if"}|
+    ({Token.string == "As"}|{Token.string == "as"}){Token.string == "though"}|
+    ({Token.string == "Whereas"}|{Token.string == "whereas"})|
+    ({Token.string == "While"}|{Token.string == "while"})
+): label
+-->
+:label.FiniteAdverbalCl = {rule= "FiniteAdverbalClauses" }
