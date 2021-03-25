@@ -4,16 +4,17 @@
     <title>Text Complexity Analyzer</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link href="../static/css/design.css" th:href="@{css/design.css}" rel="stylesheet">
-
     </head>
 <body class="back">
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <script src="https://getbootstrap.com/docs/4.5/assets/js/docs.min.js"></script>
+
 
 <header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-body border-bottom shadow-sm customHeader"  >
     <p class="h5 my-0 me-md-auto fw-normal">Text Complexity Analyzer</p>
@@ -29,11 +30,8 @@
                  <div class="col-4">
                      <div class="input-group">
                          <div class="custom-file">
-                             <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" name="file">
+                             <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" name="file" accept=".txt">
                              <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
-                         </div>
-                         <div class="input-group-append custombtn">
-                             <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Upload</button>
                          </div>
                      </div>
                  </div>
@@ -41,9 +39,9 @@
              </div>
          <br>
 
-         <form action="/" method="post">
+         <form  method="post">
              <div class="input-group">
-                 <textarea class="form-control" name="userText" aria-label="With textarea" rows="8" th:text="${text}" placeholder="Enter your text..."></textarea>
+                 <textarea class="form-control" id="userText" aria-label="With textarea" rows="8" th:text="${text}" placeholder="Enter your text..."></textarea>
              </div>
              <h5 class="steps">Step 2: select measure(s).</h5>
              <div class="form-check">
@@ -148,6 +146,9 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="../static/scripts/main.js" th:src="@{scripts/main.js}">
+</script>
+<script src="https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js"></script>
 
 
 <!--
