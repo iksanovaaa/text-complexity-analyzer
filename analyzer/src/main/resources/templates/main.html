@@ -33,6 +33,9 @@
                              <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" name="file" accept=".txt">
                              <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
                          </div>
+                         <div class="input-group-append custombtn">
+                         <button class="btn btn-outline-secondary" type="button" id="btnUpload" onclick="uploadFile()">Upload</button>
+                        </div>
                      </div>
                  </div>
                  <div class="col-8"></div>
@@ -41,7 +44,7 @@
 
          <form  method="post">
              <div class="input-group">
-                 <textarea class="form-control" id="userText" aria-label="With textarea" rows="8" th:text="${text}" placeholder="Enter your text..."></textarea>
+                 <textarea class="form-control" id="userText" aria-label="With textarea" rows="8" th:text="${text}" placeholder="Enter your text..." onchange="hideResults()"></textarea>
              </div>
              <h5 class="steps">Step 2: select measure(s).</h5>
              <div class="form-check">
@@ -50,20 +53,20 @@
                      <div class="col">
                          <p><strong>Clausal</strong></p>
                          <div class="form-check">
-                             <input class="form-check-input" type="checkbox" value="" id="defaultCheck" required>
-                             <label class="form-check-label" for="defaultCheck">
+                             <input class="form-check-input" type="checkbox" value="" id="chFAC">
+                             <label class="form-check-label" for="chFAC">
                                  Finite adverbial clauses
                              </label>
                          </div>
                          <div class="form-check">
-                             <input class="form-check-input" type="checkbox" value="" id="invalidCheck1" required>
-                             <label class="form-check-label" for="invalidCheck1">
+                             <input class="form-check-input" type="checkbox" value="" id="chWCC">
+                             <label class="form-check-label" for="chWCC">
                                  Wh-complement clauses
                              </label>
                          </div>
                          <div class="form-check">
-                             <input class="form-check-input" type="checkbox" value="" id="invalidCheck11" required>
-                             <label class="form-check-label" for="invalidCheck11">
+                             <input class="form-check-input" type="checkbox" value="" id="chVTC">
+                             <label class="form-check-label" for="chVTC">
                                  Verb+that clauses
                              </label>
                          </div>
@@ -72,26 +75,26 @@
                      <div class="col">
                          <p><strong>Phrasal</strong></p>
                          <div class="form-check">
-                             <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" required>
-                             <label class="form-check-label" for="defaultCheck1">
+                             <input class="form-check-input" type="checkbox" value="" id="chN">
+                             <label class="form-check-label" for="chN">
                                  Nouns
                              </label>
                          </div>
                          <div class="form-check">
-                             <input class="form-check-input" type="checkbox" value="" id="invalidCheck3" required>
-                             <label class="form-check-label" for="invalidCheck3">
+                             <input class="form-check-input" type="checkbox" value="" id="chAA">
+                             <label class="form-check-label" for="chAA">
                                  Attributive adjectives
                              </label>
                          </div>
                          <div class="form-check">
-                             <input class="form-check-input" type="checkbox" value="" id="invalidCheck31" required>
-                             <label class="form-check-label" for="invalidCheck31">
+                             <input class="form-check-input" type="checkbox" value="" id="chPN">
+                             <label class="form-check-label" for="chPN">
                                  Premodifying nouns
                              </label>
                          </div>
                          <div class="form-check">
-                             <input class="form-check-input" type="checkbox" value="" id="invalidCheck32" required>
-                             <label class="form-check-label" for="invalidCheck32">
+                             <input class="form-check-input" type="checkbox" value="" id="chOG">
+                             <label class="form-check-label" for="chOG">
                                  Of-genitives
                              </label>
                          </div>
@@ -103,13 +106,13 @@
              <h5 class="steps">Step 3: get results.</h5>
              <div class="custombtn">
                  <br>
-                 <button type="submit" class="btn btn-outline-secondary">Analyze</button>
+                 <button type="button" class="btn btn-outline-secondary" id="btnAnalyze" onclick="showResults()">Analyze</button>
              </div>
          </form>
 
          <br>
 
-         <div class="custombtn results" >
+         <div class="custombtn" id="results" hidden>
              <hr>
              <h1>Results</h1>
              <h4>Number of metrics in the text</h4>
@@ -117,28 +120,28 @@
                  <div class="col">
                      <p><strong>Clausal</strong></p>
                      <ul class="list-group list-group-flush">
-                         <li class="list-group-item">Finite adverbial clauses: 0</li>
-                         <li class="list-group-item">Wh-complement clauses: 0</li>
-                         <li class="list-group-item">Verb+that clauses: 0</li>
+                         <li class="list-group-item" id="liFAC" hidden><p id="FAC">Finite adverbial clauses:</p><p id="FACnum">0</p></li>
+                         <li class="list-group-item" id="liWCC" hidden><p id="WCC">Wh-complement clauses:</p><p id="WCCnum">0</p></li>
+                         <li class="list-group-item" id="liVTC" hidden><p id="VTC">Verb+that clauses:</p><p id="VTCnum">0</p></li>
                      </ul>
                  </div>
                  <div class="col">
                      <p><strong>Phrasal</strong></p>
                      <ul class="list-group list-group-flush">
-                         <li class="list-group-item">Nouns: 0</li>
-                         <li class="list-group-item">Attributive adjectives: 0</li>
-                         <li class="list-group-item">Premodifying nouns: 0</li>
-                         <li class="list-group-item">Of-genitives: 0 </li>
+                         <li class="list-group-item" id="liN" hidden><p id="N">Nouns:</p><p id="Nnum">0</p></li>
+                         <li class="list-group-item" id="liAA" hidden><p id="AA">Attributive adjectives:</p><p id="AAnum">0</p></li>
+                         <li class="list-group-item" id="liPN" hidden><p id="PN">Premodifying nouns:</p><p id="PNnum">0</p></li>
+                         <li class="list-group-item" id="liOG" hidden><p id="OG">Of-genitives:</p><p id="OGnum">0</p></li>
                      </ul>
                  </div>
              </div>
 
              <h4>Recommendations</h4>
-             <p>Some text here just for example ;)</p>
+             <p id="comment">Some text here just for example ;)</p>
 
              <div class="custombtn">
                  <br>
-                 <button type="button" class="btn btn-outline-secondary">Download report</button>
+                 <button type="button" class="btn btn-outline-secondary" id="btnReport">Download report</button>
              </div>
          </div>
      </div>
