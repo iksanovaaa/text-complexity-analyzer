@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link href="../static/css/design.css" th:href="@{css/design.css}" rel="stylesheet">
     </head>
-<body class="back">
+<body class="back" onload="startFunc()">
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
@@ -31,7 +31,7 @@
                      <div class="input-group">
                          <div class="custom-file">
                              <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" name="file" accept=".txt">
-                             <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                             <label class="custom-file-label" for="inputGroupFile04" >Choose file</label>
                          </div>
                          <div class="input-group-append custombtn">
                          <button class="btn btn-outline-secondary" type="button" id="btnUpload" onclick="uploadFile()">Upload</button>
@@ -41,10 +41,10 @@
                  <div class="col-8"></div>
              </div>
          <br>
+         <form action="/" method="post">
 
-         <form  method="post">
              <div class="input-group">
-                 <textarea class="form-control" id="userText" aria-label="With textarea" rows="8" th:text="${text}" placeholder="Enter your text..." onchange="hideResults()"></textarea>
+                 <textarea class="form-control" name="userText" id="userText" aria-label="With textarea" rows="8" th:text="${text}" placeholder="Enter your text..." onchange="hideResults()"></textarea>
              </div>
              <h5 class="steps">Step 2: select measure(s).</h5>
              <div class="form-check">
@@ -53,19 +53,19 @@
                      <div class="col">
                          <p><strong>Clausal</strong></p>
                          <div class="form-check">
-                             <input class="form-check-input" type="checkbox" value="" id="chFAC">
+                             <input name="fac" class="form-check-input" type="checkbox" value="" id="chFAC" th:checked="${fac}">
                              <label class="form-check-label" for="chFAC">
                                  Finite adverbial clauses
                              </label>
                          </div>
                          <div class="form-check">
-                             <input class="form-check-input" type="checkbox" value="" id="chWCC">
+                             <input name="wcc" class="form-check-input" type="checkbox" value="" id="chWCC" th:checked="${wcc}">
                              <label class="form-check-label" for="chWCC">
                                  Wh-complement clauses
                              </label>
                          </div>
                          <div class="form-check">
-                             <input class="form-check-input" type="checkbox" value="" id="chVTC">
+                             <input name="vtc" class="form-check-input" type="checkbox" value="" id="chVTC" th:checked="${vtc}">
                              <label class="form-check-label" for="chVTC">
                                  Verb+that clauses
                              </label>
@@ -75,25 +75,25 @@
                      <div class="col">
                          <p><strong>Phrasal</strong></p>
                          <div class="form-check">
-                             <input class="form-check-input" type="checkbox" value="" id="chN">
+                             <input name="n" class="form-check-input" type="checkbox" value="" id="chN" th:checked="${n}">
                              <label class="form-check-label" for="chN">
                                  Nouns
                              </label>
                          </div>
                          <div class="form-check">
-                             <input class="form-check-input" type="checkbox" value="" id="chAA">
+                             <input name="aa" class="form-check-input" type="checkbox" value="" id="chAA" th:checked="${aa}">
                              <label class="form-check-label" for="chAA">
                                  Attributive adjectives
                              </label>
                          </div>
                          <div class="form-check">
-                             <input class="form-check-input" type="checkbox" value="" id="chPN">
+                             <input name="pn" class="form-check-input" type="checkbox" value="" id="chPN" th:checked="${pn}">
                              <label class="form-check-label" for="chPN">
                                  Premodifying nouns
                              </label>
                          </div>
                          <div class="form-check">
-                             <input class="form-check-input" type="checkbox" value="" id="chOG">
+                             <input name="og" class="form-check-input" type="checkbox" value="" id="chOG" th:checked="${og}">
                              <label class="form-check-label" for="chOG">
                                  Of-genitives
                              </label>
@@ -106,13 +106,13 @@
              <h5 class="steps">Step 3: get results.</h5>
              <div class="custombtn">
                  <br>
-                 <button type="button" class="btn btn-outline-secondary" id="btnAnalyze" onclick="showResults()">Analyze</button>
+                 <button type="submit" class="btn btn-outline-secondary" id="btnAnalyze" onclick="showResults()">Analyze</button>
              </div>
          </form>
 
          <br>
 
-         <div class="custombtn" id="results" hidden>
+         <div class="custombtn" id="results" hidden >
              <hr>
              <h1>Results</h1>
              <h4>Number of metrics in the text</h4>
@@ -120,18 +120,18 @@
                  <div class="col">
                      <p><strong>Clausal</strong></p>
                      <ul class="list-group list-group-flush">
-                         <li class="list-group-item" id="liFAC" hidden><p id="FAC">Finite adverbial clauses:</p><p id="FACnum">0</p></li>
-                         <li class="list-group-item" id="liWCC" hidden><p id="WCC">Wh-complement clauses:</p><p id="WCCnum">0</p></li>
-                         <li class="list-group-item" id="liVTC" hidden><p id="VTC">Verb+that clauses:</p><p id="VTCnum">0</p></li>
+                         <li class="list-group-item" id="liFAC" hidden><p id="FAC">Finite adverbial clauses:</p><p id="FACnum" name="FACnum" th:text="${FACnum}"></p></li>
+                         <li class="list-group-item" id="liWCC" hidden><p id="WCC">Wh-complement clauses:</p><p id="WCCnum" name="WCCnum" th:text="${WCCnum}"></p></li>
+                         <li class="list-group-item" id="liVTC" hidden><p id="VTC">Verb+that clauses:</p><p id="VTCnum" name="VTCnum" th:text="${VTCnum}"></p></li>
                      </ul>
                  </div>
                  <div class="col">
                      <p><strong>Phrasal</strong></p>
                      <ul class="list-group list-group-flush">
-                         <li class="list-group-item" id="liN" hidden><p id="N">Nouns:</p><p id="Nnum">0</p></li>
-                         <li class="list-group-item" id="liAA" hidden><p id="AA">Attributive adjectives:</p><p id="AAnum">0</p></li>
-                         <li class="list-group-item" id="liPN" hidden><p id="PN">Premodifying nouns:</p><p id="PNnum">0</p></li>
-                         <li class="list-group-item" id="liOG" hidden><p id="OG">Of-genitives:</p><p id="OGnum">0</p></li>
+                         <li class="list-group-item" id="liN" hidden><p id="N">Nouns:</p><p id="Nnum" name="Nnum" th:text="${Nnum}"></p></li>
+                         <li class="list-group-item" id="liAA" hidden><p id="AA">Attributive adjectives:</p><p id="AAnum" name="AAnum" th:text="${AAnum}"></p></li>
+                         <li class="list-group-item" id="liPN" hidden><p id="PN">Premodifying nouns:</p><p id="PNnum" name="PNnum" th:text="${PNnum}"></p></li>
+                         <li class="list-group-item" id="liOG" hidden><p id="OG">Of-genitives:</p><p id="OGnum" name="OGnum" th:text="${OGnum}"></p></li>
                      </ul>
                  </div>
              </div>

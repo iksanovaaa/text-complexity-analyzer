@@ -1,4 +1,5 @@
 btnUpload.onclick = function uploadFile(){
+    document.getElementById("results").hidden=true;
     var reader = new FileReader();
     reader.onload = function(e){
         $("#userText").val(e.target.result);
@@ -40,7 +41,9 @@ function showResults() {
 };
 
 chFAC.onchange = function changeLiFAC(){
-    document.getElementById("liFAC").hidden = !document.getElementById("liFAC").hidden
+    if (document.getElementById("chFAC").checked)
+    document.getElementById("liFAC").hidden = false
+    else document.getElementById("liFAC").hidden = true
 }
 
 chWCC.onchange = function changeLiWCC(){
@@ -69,7 +72,7 @@ chOG.onchange = function changeLiOG(){
 
 btnReport.onclick = function downloadReport(){
     var content = document.getElementById("userText").value;
-    content += "\n\n\nRESULT\n\n";
+    content += "\n\n\nRESULTS\n\n";
     content += "Number of metrics in the text\n\n";
     if(document.getElementById("chFAC").checked || document.getElementById("chWCC").checked ||
         document.getElementById("chVTC").checked) {
@@ -81,7 +84,7 @@ btnReport.onclick = function downloadReport(){
         if(document.getElementById("chVTC").checked)
             content = content + document.getElementById("VTC").innerHTML + " " + document.getElementById("VTCnum").innerHTML + "\n";
     }
-    content += "\n\n"
+    content += "\n"
 
     if(document.getElementById("chN").checked || document.getElementById("chAA").checked ||
         document.getElementById("chPN").checked || document.getElementById("chOG").checked){
@@ -104,3 +107,49 @@ btnReport.onclick = function downloadReport(){
     aTag.download = "Report.txt";
     aTag.click();
 };
+
+function startFunc(){
+
+    if ((document.getElementById("userText").value == "") ||
+        (!/((\W*|[0-9]*)[a-zA-Z]+)+/.test(document.getElementById("userText").value)) ||
+        (!document.getElementById("chFAC").checked && !document.getElementById("chWCC").checked &&
+            !document.getElementById("chVTC").checked && !document.getElementById("chN").checked &&
+            !document.getElementById("chAA").checked && !document.getElementById("chPN").checked &&
+            !document.getElementById("chOG").checked))
+    {
+        document.getElementById("results").hidden = true;
+    }
+    else {
+        document.getElementById("results").hidden = false;
+        if (document.getElementById("chFAC").checked)
+            document.getElementById("liFAC").hidden = false
+        if (document.getElementById("chWCC").checked)
+            document.getElementById("liWCC").hidden = false
+        if (document.getElementById("chVTC").checked)
+            document.getElementById("liVTC").hidden = false
+
+        if (document.getElementById("chN").checked)
+            document.getElementById("liN").hidden = false
+        if (document.getElementById("chAA").checked)
+            document.getElementById("liAA").hidden = false
+        if (document.getElementById("chPN").checked)
+            document.getElementById("liPN").hidden = false
+        if (document.getElementById("chOG").checked)
+            document.getElementById("liOG").hidden = false
+
+        numClausal = Number(document.getElementById("FACnum").innerHTML) +
+            Number(document.getElementById("WCCnum").innerHTML) + Number(document.getElementById("VTCnum").innerHTML);
+        numPhrasal = Number(document.getElementById("Nnum").innerHTML) +
+            Number(document.getElementById("AAnum").innerHTML) + Number(document.getElementById("PNnum").innerHTML) +
+            Number(document.getElementById("OGnum").innerHTML);
+        if (numClausal == 0 && numPhrasal == 0)
+            document.getElementById("comment").innerHTML = "You can improve your text by increasing both the " +
+                "number of clausal complexity metrics and the number of phrase complexity metrics."
+        else if (numPhrasal <= numClausal)
+            document.getElementById("comment").innerHTML = "You can improve your text by reducing the number " +
+                "of clausal complexity metrics and increasing the number of phrase complexity metrics."
+        else document.getElementById("comment").innerHTML = "You can improve your text by increasing " +
+                "the number of phrase complexity metrics."
+        document.getElementById("results").hidden=false;
+    }
+}

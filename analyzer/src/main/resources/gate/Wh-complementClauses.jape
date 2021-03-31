@@ -16,7 +16,7 @@ Rule: WhComplementClauses
 				({Token.category == "NN"}|{Token.category == "NNS"}|{Token.category == "NNP"}|
 				{Token.category == "NNPS"})
 			)|
-			{Token.category == "PP"}
+			({Token.category == "PP"}|{Token.category == "PRP"})
 		)
 	)
 ): label

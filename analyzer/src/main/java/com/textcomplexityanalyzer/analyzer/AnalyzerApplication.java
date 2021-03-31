@@ -30,4 +30,3 @@ public class AnalyzerApplication {
         return (CorpusController) PersistenceManager.loadObjectFromUrl(resource);
     }
 }
-
