@@ -29,12 +29,12 @@ function showResults() {
             Number(document.getElementById("OGnum").innerHTML);
         if (numClausal == 0 && numPhrasal == 0)
             document.getElementById("comment").innerHTML = "You can improve your text by increasing both the " +
-                "number of clausal complexity metrics and the number of phrase complexity metrics."
+                "number of clausal complexity metrics and the number of phrasal complexity metrics."
         else if (numPhrasal <= numClausal)
             document.getElementById("comment").innerHTML = "You can improve your text by reducing the number " +
-                "of clausal complexity metrics and increasing the number of phrase complexity metrics."
+                "of clausal complexity metrics and increasing the number of phrasal complexity metrics."
         else document.getElementById("comment").innerHTML = "You can improve your text by increasing " +
-            "the number of phrase complexity metrics."
+            "the number of phrasal complexity metrics."
         document.getElementById("results").hidden=false;
     }
 
